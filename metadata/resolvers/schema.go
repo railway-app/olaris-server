@@ -1,6 +1,6 @@
 package resolvers
 
-//go:generate sh -c "(printf 'package resolvers\n\nvar schemaTxt = `' && cat schema.graphql && echo -n '`') > schematxt.go"
+//go:generate sh -c "printf 'package resolvers\n\nvar schemaTxt = `%s`\n' \"$(cat schema.graphql)\" > schematxt.go"
 
 import (
 	"github.com/graph-gophers/graphql-go"
