@@ -57,6 +57,10 @@ func FileExists(pathName string) bool {
 // BaseConfigPath returns the root for our config folders.
 func BaseConfigPath() string {
 	configDir := viper.GetString("configDir")
+	if configDir == "" {
+		// This can happen during other use-cases where not the entire stack is loaded, for instance during tests.
+		configDir = GetDefaultCacheDir()
+	}
 	return configDir
 }
 
