@@ -145,12 +145,14 @@ func NewServeCommand() *cmd.CobraCommand {
 	c.Flags().Bool("db-log", false, "sets whether the database should log queries")
 	c.Flags().String("db-conn", "", "sets the database connection string")
 	c.Flags().String("sqlite_dir", helpers.DefaultSQLiteDir(), "Path where the SQLite database should be stored")
+	c.Flags().Bool("scan-hidden", false, "sets whether to scan hidden directories (directories starting with a .)")
 
 	viper.BindPFlag("server.port", c.Flags().Lookup("port"))
 	viper.BindPFlag("server.verbose", c.Flags().Lookup("verbose"))
 	viper.BindPFlag("server.DBLog", c.Flags().Lookup("db-log"))
-	viper.BindPFlag("database.connection", c.Flags().Lookup("db-conn"))
 	viper.BindPFlag("server.sqliteDir", c.Flags().Lookup("sqlite_dir"))
+	viper.BindPFlag("database.connection", c.Flags().Lookup("db-conn"))
+	viper.BindPFlag("metadata.scan_hidden", c.Flags().Lookup("scan-hidden"))
 
 	return &cmd.CobraCommand{Command: c}
 }
