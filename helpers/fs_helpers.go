@@ -60,13 +60,13 @@ func BaseConfigPath() string {
 	return configDir
 }
 
-// MetadataConfigPath returns the config path for the md server
-func MetadataConfigPath() string {
+// DefaultSQLitePath returns the config path for the md server
+func DefaultSQLiteDir() string {
 	return path.Join(BaseConfigPath(), "metadb")
 }
 
-// CacheDir returns a cache folder to use.
-func CacheDir() string {
+// GetDefaultCacheDir returns a cache folder to use.
+func GetDefaultCacheDir() string {
 	cacheDir, err := UserCacheDir()
 	if err != nil {
 		panic(fmt.Sprintf("Error getting user cache dir: %s", err.Error()))
@@ -76,7 +76,7 @@ func CacheDir() string {
 
 // LogPath returns the path to our logfolder.
 func LogPath() string {
-	logPath := path.Join(CacheDir(), "log")
+	logPath := path.Join(BaseConfigPath(), "log")
 	EnsurePath(logPath)
 	return logPath
 }

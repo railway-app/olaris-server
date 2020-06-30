@@ -12,6 +12,7 @@ import (
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 
 	"gitlab.com/olaris/olaris-server/cmd/root"
 	"gitlab.com/olaris/olaris-server/helpers"
@@ -49,7 +50,7 @@ func NewDumpDebugCommand() *cmd.CobraCommand {
 
 			fw, _ := w.Create("metadata.db.sqlite")
 			// TODO(Leon Handreke): Don't hardcode-copypaste this path from metadata/db/database.go
-			content, _ := ioutil.ReadFile(filepath.Join(helpers.MetadataConfigPath(), "metadata.db"))
+			content, _ := ioutil.ReadFile(filepath.Join(viper.GetString("server.sqliteDir"), "metadata.db"))
 			fw.Write(content)
 
 			err = w.Close()

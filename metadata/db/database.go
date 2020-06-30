@@ -8,6 +8,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"gitlab.com/olaris/olaris-server/helpers"
 	"gitlab.com/olaris/olaris-server/metadata/db/dialects/mysql"
 	"gitlab.com/olaris/olaris-server/metadata/db/dialects/postgres"
@@ -31,7 +32,7 @@ type DatabaseOptions struct {
 }
 
 func getDefaultDbPath() (string, error) {
-	dbDir := helpers.MetadataConfigPath()
+	dbDir := viper.GetString("server.sqliteDir")
 	if err := helpers.EnsurePath(dbDir); err != nil {
 		return "", err
 	}
@@ -45,7 +46,6 @@ func defaultDb(logMode bool) *gorm.DB {
 		panic(fmt.Sprintf("failed to get default database path: %s\n", err))
 	}
 	db, err = sqlite.NewSQLiteDatabase(dbPath, logMode)
-	//db.Exec("PRAGMA journal_mode=WAL;")
 	if err != nil {
 		panic(fmt.Sprintf("failed to connect database: %s\n", err))
 	}
@@ -65,7 +65,6 @@ func NewDb(options DatabaseOptions) *gorm.DB {
 		switch engine {
 		case SQLite:
 			db, err = sqlite.NewSQLiteDatabase(connection, options.LogMode)
-			//db.Exec("PRAGMA journal_mode=WAL;")
 			if err != nil {
 				panic(fmt.Sprintf("failed to connect database: %s\n", err))
 			}
