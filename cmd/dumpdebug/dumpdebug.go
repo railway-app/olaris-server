@@ -46,7 +46,7 @@ func NewDumpDebugCommand() *cmd.CobraCommand {
 			}
 			w := zip.NewWriter(f)
 
-			writeFilesInDir(w, helpers.LogPath(), "log/")
+			writeFilesInDir(w, helpers.LogDir(), "log/")
 
 			fw, _ := w.Create("metadata.db.sqlite")
 			// TODO(Leon Handreke): Don't hardcode-copypaste this path from metadata/db/database.go
