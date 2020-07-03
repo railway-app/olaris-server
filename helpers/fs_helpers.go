@@ -64,11 +64,6 @@ func BaseConfigDir() string {
 	return configDir
 }
 
-// DefaultSQLitePath returns the config path for the md server
-func DefaultSQLiteDir() string {
-	return path.Join(BaseConfigDir(), "metadb")
-}
-
 // GetDefaultCacheDir returns a cache folder to use.
 func GetDefaultCacheDir() string {
 	cacheDir, err := UserCacheDir()

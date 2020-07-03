@@ -8,6 +8,7 @@ import (
 	_ "net/http/pprof" // For Profiling
 	"os"
 	"os/signal"
+	"path"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -144,7 +145,7 @@ func NewServeCommand() *cmd.CobraCommand {
 	c.Flags().BoolP("verbose", "v", true, "verbose logging")
 	c.Flags().Bool("db-log", false, "sets whether the database should log queries")
 	c.Flags().String("db-conn", "", "sets the database connection string")
-	c.Flags().String("sqlite_dir", helpers.DefaultSQLiteDir(), "Path where the SQLite database should be stored")
+	c.Flags().String("sqlite_dir", path.Join(helpers.BaseConfigDir(), "metadb"), "Path where the SQLite database should be stored")
 	c.Flags().Bool("scan-hidden", false, "sets whether to scan hidden directories (directories starting with a .)")
 
 	viper.BindPFlag("server.port", c.Flags().Lookup("port"))
