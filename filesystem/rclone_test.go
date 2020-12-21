@@ -1,17 +1,12 @@
 package filesystem
 
 import (
-	"context"
-	"fmt"
-	"reflect"
 	"sync"
 	"testing"
 
 	"github.com/rclone/rclone/fs"
 	"github.com/rclone/rclone/fstest/mockfs"
 	"github.com/rclone/rclone/fstest/mockobject"
-	"github.com/rclone/rclone/vfs"
-	"github.com/rclone/rclone/vfs/vfscommon"
 	"github.com/stretchr/testify/require"
 )
 
