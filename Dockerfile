@@ -25,5 +25,6 @@ COPY --from=build /go/src/gitlab.com/olaris/olaris-server/build/olaris /opt/olar
 COPY ./docker/entrypoint.sh /
 RUN mkdir -p /home/olaris/.config/olaris && chown olaris:olaris /home/olaris/.config/olaris
 VOLUME /home/olaris/.config/olaris
+ENV PORT=8080
 EXPOSE 8080
 ENTRYPOINT ["/entrypoint.sh", "/opt/olaris/olaris"]
